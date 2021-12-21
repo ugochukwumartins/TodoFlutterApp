@@ -1,7 +1,9 @@
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoapp/Model/TaskModel.dart';
+import 'package:todoapp/Model/mdoelProvider.dart';
 import 'package:todoapp/Screens/BottomSheet.dart';
 import 'package:todoapp/Screens/TaskDisplay.dart';
 
@@ -11,15 +13,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<TaskModel> taskmodel = [
-    TaskModel(name: "Food"),
-    TaskModel(name: "Meat"),
-    TaskModel(name: "Rice"),
-    TaskModel(name: "Foodes"),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final taskmodel = Provider.of<TaskProvider>(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(
@@ -27,15 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         onPressed: () {
           showModalBottomSheet(
-              context: context,
-              builder: (context) => BottomSheets(
-                    addtask: (value) {
-                      setState(() {
-                        taskmodel.add(TaskModel(name: value));
-                      });
-                      Navigator.pop(context);
-                    },
-                  ));
+              context: context, builder: (context) => BottomSheets());
         },
       ),
       backgroundColor: Colors.blue,
@@ -75,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 5,
                 ),
                 Text(
-                  '${taskmodel.length}  Numbers of task',
+                  '${taskmodel.taskmodel.length}  Numbers of task',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -96,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   topRight: Radius.circular(20),
                 ),
               ),
-              child: TaskDisplay(taskmodel),
+              child: TaskDisplay(),
             ),
           ),
         ],

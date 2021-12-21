@@ -1,14 +1,14 @@
 // ignore_for_file: file_names, prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:todoapp/Model/mdoelProvider.dart';
+import 'package:provider/provider.dart';
 
 class BottomSheets extends StatelessWidget {
-  BottomSheets({required this.addtask});
-  final Function addtask;
-
   @override
   Widget build(BuildContext context) {
-    String? task;
+    final taskmodel = Provider.of<TaskProvider>(context);
+    String task = "";
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -38,7 +38,8 @@ class BottomSheets extends StatelessWidget {
             FlatButton(
               color: Colors.blue,
               onPressed: () {
-                addtask(task);
+                taskmodel.AddTask(task);
+                Navigator.pop(context);
               },
               child: Text(
                 "Add",

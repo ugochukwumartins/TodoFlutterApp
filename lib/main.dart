@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoapp/Model/mdoelProvider.dart';
 import 'package:todoapp/Screens/HomeScreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TodoApp',
-      home: HomeScreen(),
+    return ChangeNotifierProvider<TaskProvider>(
+      create: (context) => TaskProvider(),
+      child: MaterialApp(
+        title: 'TodoApp',
+        home: HomeScreen(),
+      ),
     );
   }
 }

@@ -6,15 +6,20 @@ import 'package:flutter/material.dart';
 
 class TaskChild extends StatelessWidget {
   TaskChild(
-      {required this.Ischecked, required this.title, required this.onPress});
+      {required this.Ischecked,
+      required this.title,
+      required this.onPress,
+      required this.delete});
   final bool Ischecked;
 
   final String title;
   void Function(bool? isChecked) onPress;
+  void Function() delete;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onLongPress: delete,
       title: Text(
         title,
         style: TextStyle(
